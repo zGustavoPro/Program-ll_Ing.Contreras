@@ -1,0 +1,57 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Unit1.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm1 *Form1;
+//---------------------------------------------------------------------------
+  //secuencia numeros   eje: hola123ho12 => 2
+__fastcall TForm1::TForm1(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+bool EsDigito(char d){
+return (d>='0') && (d<='9');
+}
+Word cantNumeros(AnsiString x){
+Word c;
+Word n=x.Length();
+
+if (n==0)       //caso base
+	c=0;
+else  if (n==1){   //2do caso
+if (EsDigito(x[1]))
+	c=1;   else
+	c=0;
+ }
+ else {       //caso general
+AnsiString y=x;
+x.Delete( n/2+1,n-n/2);
+y.Delete(1,n/2);
+c=cantNumeros(x)+cantNumeros(y);
+if(EsDigito(x[n/2]) && EsDigito(y[1]))
+c--;
+}
+return c;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button7Click(TObject *Sender)
+{
+  // Edit1->Text=Inverso2(Edit1->Text);
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button8Click(TObject *Sender)
+{
+  char a='a'; char b='@';
+  Edit2->Text=a+b;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button9Click(TObject *Sender)
+{  Word n=19;            // "/" parte entera y decimal manda el de lado izquierdo
+ Edit2->Text=cantNumeros(Edit1->Text);
+}
+//---------------------------------------------------------------------------

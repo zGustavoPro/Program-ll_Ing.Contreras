@@ -1,0 +1,89 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Unit1.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm1 *Form1;
+//---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+byte suma(Cardinal n){
+	   byte s;
+	   if (n<10) return n;
+		 else
+		 s=(n%10)+suma(n/10);
+
+		 return s;
+}
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+	 Edit2->Text=IntToStr(suma(StrToInt(Edit1->Text))) ;
+
+}
+//---------------------------------------------------------------------------
+ byte sum_par(Cardinal n){
+byte s=0;
+if ((n<10) &&(n%2==0)){
+	return n;         }
+
+else if ((n%10)%2==0)
+	  s= (n % 10)+sum_par(n/10);
+else   return sum_par(n/10);
+
+			return s;
+}
+
+void __fastcall TForm1::Button2Click(TObject *Sender)
+{
+ Edit2->Text=IntToStr(sum_par(StrToInt(Edit1->Text)));
+}
+//---------------------------------------------------------------------------
+byte sum_impar(Cardinal n){
+ byte s=0;
+if ((n<10) &&(n%2!=0)){
+	return n;         }
+
+else if ((n%10)%2!=0)
+	  s= (n % 10)+sum_impar(n/10);
+else   return sum_impar(n/10);
+
+			return s;
+}
+
+void __fastcall TForm1::Button3Click(TObject *Sender)
+{
+Edit2->Text=IntToStr(sum_impar(StrToInt(Edit1->Text)));
+}
+//---------------------------------------------------------------------------
+int inv(int n,int n1=0){
+if (n==0)
+ return n1;
+else
+return inv(n/10,n1*10+n%10);
+
+}
+
+void __fastcall TForm1::Button4Click(TObject *Sender)
+{
+Edit2->Text=IntToStr(inv(StrToInt(Edit1->Text)));
+}
+//---------------------------------------------------------------------------
+  int factorial(int n){
+ if (n==0)
+ n=1;
+ else
+ n=n*factorial(n-1);
+	return n;
+}
+void __fastcall TForm1::Button5Click(TObject *Sender)
+{
+Edit2->Text=IntToStr(factorial(StrToInt(Edit1->Text)));
+}
+//---------------------------------------------------------------------------
